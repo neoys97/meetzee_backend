@@ -43,6 +43,23 @@ Resources:
             Path: /createUser
             Method: get
 
+  loginUserFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: loginUserFunction
+      CodeUri: loginUser/
+      Handler: loginUser.lambdaHandler
+      Runtime: nodejs10.x
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        documentdbConnectionTest:
+          Type: Api
+          Properties:
+            Path: /loginUser
+            Method: get
+
 Outputs:
   firestoreConnectionTestApi:
     Description: "API Gateway endpoint URL for Prod stage for documentdbConnectionTest function"
@@ -57,4 +74,11 @@ Outputs:
   createUserFunction:
     Description: "Create User Lambda Function ARN"
     Value: !GetAtt createUserFunction.Arn
+  
+  loginUserApi:
+    Description: "API Gateway endpoint URL for Prod stage for login User function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/loginUser/"
+  createUserFunction:
+    Description: "Create User Lambda Function ARN"
+    Value: !GetAtt loginUserFunction.Arn
 
