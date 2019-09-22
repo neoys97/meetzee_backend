@@ -1,6 +1,16 @@
 /**
  * Create user on the firestore
  * - add firestore credential in current directory and rename it as serviceAccount.json
+ * 
+ * Required JSON key:
+ * userId   : user's ID
+ * password : user's password
+ * 
+ * Returned JSON format:
+ * status   : 0 => failed operation, user ID already exists 
+ *            1 => successful operation
+ *            2 => failed operation
+ * 
  */
 const admin = require('firebase-admin');
 const serviceAccount = require('./serviceAccount.json');

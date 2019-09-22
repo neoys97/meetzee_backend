@@ -20,7 +20,7 @@ Resources:
         - AWSLambdaVPCAccessExecutionRole
       MemorySize: 256
       Events:
-        documentdbConnectionTest:
+        firestoreConnectionTest:
           Type: Api
           Properties:
             Path: /firestoreConnectionTest
@@ -37,7 +37,7 @@ Resources:
         - AWSLambdaVPCAccessExecutionRole
       MemorySize: 256
       Events:
-        documentdbConnectionTest:
+        createUserFunction:
           Type: Api
           Properties:
             Path: /createUser
@@ -54,10 +54,27 @@ Resources:
         - AWSLambdaVPCAccessExecutionRole
       MemorySize: 256
       Events:
-        documentdbConnectionTest:
+        loginUserFunction:
           Type: Api
           Properties:
             Path: /loginUser
+            Method: get
+  
+  updateFriendsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateFriendsFunction
+      CodeUri: updateFriends/
+      Handler: updateFriends.lambdaHandler
+      Runtime: nodejs10.x
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        updateFriendsFunction:
+          Type: Api
+          Properties:
+            Path: /updateFriends
             Method: get
 
 Outputs:
@@ -76,9 +93,16 @@ Outputs:
     Value: !GetAtt createUserFunction.Arn
   
   loginUserApi:
-    Description: "API Gateway endpoint URL for Prod stage for login User function"
+    Description: "API Gateway endpoint URL for Prod stage for login user function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/loginUser/"
-  createUserFunction:
+  loginUserFunction:
     Description: "Create User Lambda Function ARN"
     Value: !GetAtt loginUserFunction.Arn
+
+  updateFriendsApi:
+    Description: "API Gateway endpoint URL for Prod stage for update friends function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/updateFriends/"
+  updateFriendsFunction:
+    Description: "Create User Lambda Function ARN"
+    Value: !GetAtt updateFriendsFunction.Arn
 
