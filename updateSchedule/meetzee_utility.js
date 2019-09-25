@@ -1,5 +1,19 @@
+/**
+ * utility function for meetzee
+ */
+
 const moment = require('moment');
 
+/**
+ * Miscellaneous function
+ * _______________________________________________________________________________________
+ */
+
+/**
+ * compare function for timeslots
+ * @param {timeslot JSON object} a 
+ * @param {timeslot JSON object} b 
+ */
 let compareTimeSlots = (a, b) => {
     if ( a.start < b.start ){
         return -1;
@@ -18,6 +32,15 @@ let formatSingleTimeslot = (listOfTimeslot) => {
     return listOfTimeslot;
 };
 
+/**
+ * Timeslot manipulation function
+ * _______________________________________________________________________________________
+ */
+
+/**
+ * merge all the timeslots object
+ * @param {list of timeslot JSON object} listOfTimeslot 
+ */
 let mergeSingleTimeslot = (listOfTimeslot) => {
     let mergedTimeslot = [];
     listOfTimeslot.sort(compareTimeSlots);
@@ -41,6 +64,16 @@ let mergeSingleTimeslot = (listOfTimeslot) => {
     return mergedTimeslot;
 };
 
+
+/**
+ * Routine manipulation function
+ * _______________________________________________________________________________________
+ */
+
+/**
+ * convert list of routine to schedule
+ * @param {list of routine JSON objects} listOfRoutine 
+ */
 let routinesToSchedule = (listOfRoutine) => {
     schedule =  {};
     for (routine of listOfRoutine) {
@@ -60,11 +93,11 @@ let routinesToSchedule = (listOfRoutine) => {
                 repeat_days = 30;
                 break;
             default:
-                    repeat_days = 0;
-                    break;
+                repeat_days = 0;
+                break;
         }
 
-        while (curr <= endDate) {
+        while (curr < endDate) {
             let key = curr.format("YYYY-MM-DD");
             if (schedule[key]) {
                 schedule[key].push({
