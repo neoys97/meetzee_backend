@@ -15,7 +15,7 @@ Resources:
       FunctionName: firestoreConnectionTest
       CodeUri: firestoreConnectionTest/
       Handler: firestoreConnectionTest.lambdaHandler
-      Runtime: nodejs10.x
+      Runtime: nodejs8.10
       Policies:
         - AWSLambdaVPCAccessExecutionRole
       MemorySize: 256
@@ -32,7 +32,7 @@ Resources:
       FunctionName: createUserFunction
       CodeUri: createUser/
       Handler: createUser.lambdaHandler
-      Runtime: nodejs10.x
+      Runtime: nodejs8.10
       Policies:
         - AWSLambdaVPCAccessExecutionRole
       MemorySize: 256
@@ -49,7 +49,7 @@ Resources:
       FunctionName: loginUserFunction
       CodeUri: loginUser/
       Handler: loginUser.lambdaHandler
-      Runtime: nodejs10.x
+      Runtime: nodejs8.10
       Policies:
         - AWSLambdaVPCAccessExecutionRole
       MemorySize: 256
@@ -66,7 +66,7 @@ Resources:
       FunctionName: updateFriendsFunction
       CodeUri: updateFriends/
       Handler: updateFriends.lambdaHandler
-      Runtime: nodejs10.x
+      Runtime: nodejs8.10
       Policies:
         - AWSLambdaVPCAccessExecutionRole
       MemorySize: 256
@@ -75,6 +75,23 @@ Resources:
           Type: Api
           Properties:
             Path: /updateFriends
+            Method: get
+
+  updateScheduleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: updateScheduleFunction
+      CodeUri: updateSchedule/
+      Handler: updateSchedule.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        updateScheduleFunction:
+          Type: Api
+          Properties:
+            Path: /updateSchedule
             Method: get
 
 Outputs:
@@ -96,13 +113,20 @@ Outputs:
     Description: "API Gateway endpoint URL for Prod stage for login user function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/loginUser/"
   loginUserFunction:
-    Description: "Create User Lambda Function ARN"
+    Description: "Login User Lambda Function ARN"
     Value: !GetAtt loginUserFunction.Arn
 
   updateFriendsApi:
     Description: "API Gateway endpoint URL for Prod stage for update friends function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/updateFriends/"
   updateFriendsFunction:
-    Description: "Create User Lambda Function ARN"
+    Description: "Update friends Lambda Function ARN"
     Value: !GetAtt updateFriendsFunction.Arn
+
+  updateScheduleApi:
+    Description: "API Gateway endpoint URL for Prod stage for update schedule function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/updateSchedule/"
+  updateScheduleFunction:
+    Description: "Update schedule Lambda Function ARN"
+    Value: !GetAtt updateScheduleFunction.Arn
 
