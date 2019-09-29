@@ -1,0 +1,111 @@
+createUserFunction:
+{
+    "userId": "yoshi_pika",
+    "password": "pikachu"
+}
+
+updateScheduleFunction:
+{
+    "userId": "yoshi_pika",
+    "routines": [
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 1,
+            "timeslot": ["00:00", "06:30"],
+            "title": "Rest time",
+            "remarks": "",
+            "location": ""
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 1,
+            "timeslot": ["23:30", "24:00"],
+            "title": "Rest time",
+            "remarks": "",
+            "location": ""
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 2,
+            "timeslot": ["09:30", "10:30"],
+            "title": "COMP2121",
+            "remarks": "Discrete Mathematics",
+            "location": "LE5"
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 2,
+            "timeslot": ["13:30", "15:30"],
+            "title": "ECON1220",
+            "remarks": "Introduction to Macroeconomics",
+            "location": "KK202"
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 2,
+            "timeslot": ["15:30", "16:30"],
+            "title": "ELEC2441",
+            "remarks": "Computer Organisations",
+            "location": "CPD3.28"
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 2,
+            "timeslot": ["16:30", "18:30"],
+            "title": "ELEC2346",
+            "remarks": "Electric Circuit Theory",
+            "location": "CYPP3"
+        },
+        {
+            "date": ["2019-10-02", "2019-10-31"],
+            "day": 3,
+            "repeat": 2,
+            "timeslot": ["12:30", "14:30"],
+            "title": "CCGL9017",
+            "remarks": "Food Technology",
+            "location": "MB217"
+        },
+        {
+            "date": ["2019-10-03", "2019-10-31"],
+            "day": 4,
+            "repeat": 2,
+            "timeslot": ["16:30", "18:30"],
+            "title": "ELEC2346",
+            "remarks": "Electric Circuit Theory",
+            "location": "CYCP1"
+        },
+        {
+            "date": ["2019-10-04", "2019-10-31"],
+            "day": 5,
+            "repeat": 2,
+            "timeslot": ["09:30", "11:30"],
+            "title": "COMP2121",
+            "remarks": "Discrete Mathematics",
+            "location": "LE5"
+        },
+        {
+            "date": ["2019-10-04", "2019-10-31"],
+            "day": 5,
+            "repeat": 2,
+            "timeslot": ["14:30", "15:30"],
+            "title": "ECON1220",
+            "remarks": "Introduction to Macroeconomics",
+            "location": "KK202"
+        },
+        {
+            "date": ["2019-10-04", "2019-10-31"],
+            "day": 5,
+            "repeat": 2,
+            "timeslot": ["15:30", "17:30"],
+            "title": "ELEC2441",
+            "remarks": "Computer Organisations",
+            "location": "CPD3.28"
+        }
+    ]
+}

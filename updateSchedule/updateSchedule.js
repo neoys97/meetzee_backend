@@ -12,6 +12,7 @@
  *    timeslot: ["08:00", "09:00"],
  *    title: "COMP5330",
  *    remarks: "some random new course"
+ *    location: "KKL312"
  * }, {...}]
  * Indicators: 
  * days => 0 = Sunday         repeat => 0 = None
@@ -50,7 +51,8 @@ exports.lambdaHandler = async (event, context, callback) => {
   //   repeat: 3,
   //   timeslot: ["08:00", "09:00"],
   //   title: "COMP5330",
-  //   remarks: "some random stupid course"
+  //   remarks: "some random stupid course",
+  //   location: "KKL112"
   // },
   // {
   //   date: ["2019-09-23", "2019-10-23"],
@@ -59,6 +61,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   //   timeslot: ["10:00", "12:00"],
   //   title: "ENGG1120",
   //   remarks: "electrical boring course"
+  //   location: "CYC112"
   // },
   // {
   //   date: ["2019-09-23", "2019-10-23"],
@@ -67,6 +70,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   //   timeslot: ["13:00", "14:00"],
   //   title: "ENGG1190",
   //   remarks: "electronic stupid course"
+  //   location: "CYC123"
   // },
   // {
   //   date: ["2019-09-23", "2019-10-23"],
@@ -75,6 +79,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   //   timeslot: ["08:00", "15:00"],
   //   title: "COMP3330",
   //   remarks: "some random stupid course"
+  //   location: "JSL123"
   // },
   // {
   //   date: ["2019-09-23", "2019-10-23"],
@@ -83,6 +88,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   //   timeslot: ["16:00", "17:00"],
   //   title: "COMP3241",
   //   remarks: "some new random stupid course"
+  //   location: "CPD123"
   // },
   // ];
 

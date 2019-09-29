@@ -1,0 +1,120 @@
+createUserFunction:
+{
+    "userId": "mario_torch",
+    "password": "torchick"
+}
+
+updateScheduleFunction:
+{
+    "userId": "mario_torch",
+    "routines": [
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 1,
+            "timeslot": ["00:00", "08:00"],
+            "title": "Rest time",
+            "remarks": "",
+            "location": ""
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 1,
+            "timeslot": ["22:00", "24:00"],
+            "title": "Rest time",
+            "remarks": "",
+            "location": ""
+        },
+        {
+            "date": ["2019-10-07", "2019-10-31"],
+            "day": 1,
+            "repeat": 2,
+            "timeslot": ["11:30", "12:30"],
+            "title": "CAES1000",
+            "remarks": "Core University English",
+            "location": "CPD-2.47"
+        },
+        {
+            "date": ["2019-10-07", "2019-10-31"],
+            "day": 1,
+            "repeat": 2,
+            "timeslot": ["12:30", "14:30"],
+            "title": "ACCT1101",
+            "remarks": "Introductory to Financial Accounting",
+            "location": "KK102"
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 2,
+            "timeslot": ["13:30", "15:30"],
+            "title": "ENGG1203",
+            "remarks": "Introduction to Electrical and Electronic Engineering",
+            "location": "KK202"
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 2,
+            "timeslot": ["15:30", "16:30"],
+            "title": "MATH1851",
+            "remarks": "Calculus and Ordinary Differential Equation",
+            "location": "CYPP2"
+        },
+        {
+            "date": ["2019-10-02", "2019-10-31"],
+            "day": 3,
+            "repeat": 2,
+            "timeslot": ["11:30", "13:30"],
+            "title": "ENGG1203",
+            "remarks": "Introduction to Electrical and Electronic Engineering",
+            "location": "CBLG205"
+        },
+        {
+            "date": ["2019-10-02", "2019-10-31"],
+            "day": 3,
+            "repeat": 2,
+            "timeslot": ["14:30", "16:30"],
+            "title": "CCHU9060",
+            "remarks": "Game: Learn, Play and Society",
+            "location": "LE2"
+        },
+        {
+            "date": ["2019-10-03", "2019-10-31"],
+            "day": 4,
+            "repeat": 2,
+            "timeslot": ["10:30", "12:30"],
+            "title": "CAES1000",
+            "remarks": "Core University English",
+            "location": "CPD2.47"
+        },
+        {
+            "date": ["2019-10-03", "2019-10-31"],
+            "day": 4,
+            "repeat": 2,
+            "timeslot": ["12:30", "13:30"],
+            "title": "ACCT1101",
+            "remarks": "Introduction to Financial Accounting",
+            "location": "KK102"
+        },
+        {
+            "date": ["2019-10-04", "2019-10-31"],
+            "day": 5,
+            "repeat": 2,
+            "timeslot": ["14:30", "15:30"],
+            "title": "ENGG1203",
+            "remarks": "Introduction to Electrical and Electronic Engineering",
+            "location": "KK202"
+        },
+        {
+            "date": ["2019-10-04", "2019-10-31"],
+            "day": 5,
+            "repeat": 2,
+            "timeslot": ["15:30", "17:30"],
+            "title": "MATH1851",
+            "remarks": "Calculus and Ordinary Differential Equation",
+            "location": "CYPP2"
+        }
+    ]
+}

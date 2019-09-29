@@ -94,6 +94,23 @@ Resources:
             Path: /updateSchedule
             Method: get
 
+  findSlotFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: findSlotFunction
+      CodeUri: findSlot/
+      Handler: findSlot.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        updateScheduleFunction:
+          Type: Api
+          Properties:
+            Path: /findSlot
+            Method: get
+
 Outputs:
   firestoreConnectionTestApi:
     Description: "API Gateway endpoint URL for Prod stage for documentdbConnectionTest function"
@@ -130,3 +147,9 @@ Outputs:
     Description: "Update schedule Lambda Function ARN"
     Value: !GetAtt updateScheduleFunction.Arn
 
+  findSlotApi:
+    Description: "API Gateway endpoint URL for Prod stage for find slot function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/findSlot/"
+  findSlotFunction:
+    Description: "find slot Lambda Function ARN"
+    Value: !GetAtt findSlotFunction.Arn

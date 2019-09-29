@@ -1,0 +1,111 @@
+createUserFunction:
+{
+    "userId": "luigi_toto",
+    "password": "totodile"
+}
+
+updateScheduleFunction:
+{
+    "userId": "luigi_toto",
+    "routines": [
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 1,
+            "timeslot": ["00:00", "07:00"],
+            "title": "Rest time",
+            "remarks": "",
+            "location": ""
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 1,
+            "timeslot": ["23:00", "24:00"],
+            "title": "Rest time",
+            "remarks": "",
+            "location": ""
+        },
+        {
+            "date": ["2019-10-07", "2019-10-31"],
+            "day": 1,
+            "repeat": 2,
+            "timeslot": ["11:30", "12:30"],
+            "title": "COMP3234",
+            "remarks": "Computer and Communication Network",
+            "location": "MWT1"
+        },
+        {
+            "date": ["2019-10-07", "2019-10-31"],
+            "day": 1,
+            "repeat": 2,
+            "timeslot": ["12:30", "14:30"],
+            "title": "STAT1603",
+            "remarks": "Introductory Statistics",
+            "location": "LE1"
+        },
+        {
+            "date": ["2019-10-07", "2019-10-31"],
+            "day": 1,
+            "repeat": 2,
+            "timeslot": ["15:30", "17:30"],
+            "title": "ELEC3441",
+            "remarks": "Computer Architecture",
+            "location": "LE9"
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 2,
+            "timeslot": ["12:30", "13:30"],
+            "title": "COMP3250",
+            "remarks": "Data Structure and Algorithms",
+            "location": "CPD-LG18"
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 2,
+            "timeslot": ["13:30", "16:30"],
+            "title": "COMP3848",
+            "remarks": "Integrated Projecty Design",
+            "location": "CPD-LG18"
+        },
+        {
+            "date": ["2019-10-03", "2019-10-31"],
+            "day": 4,
+            "repeat": 2,
+            "timeslot": ["10:30", "12:30"],
+            "title": "COMP3234",
+            "remarks": "Computer and Communication Network",
+            "location": "MWT2"
+        },
+        {
+            "date": ["2019-10-03", "2019-10-31"],
+            "day": 4,
+            "repeat": 2,
+            "timeslot": ["12:30", "13:30"],
+            "title": "STAT1603",
+            "remarks": "Introductory Statistics",
+            "location": "LE1"
+        },
+        {
+            "date": ["2019-10-03", "2019-10-31"],
+            "day": 4,
+            "repeat": 2,
+            "timeslot": ["15:30", "16:30"],
+            "title": "ELEC3441",
+            "remarks": "Computer Architecture",
+            "location": "LE9"
+        },
+        {
+            "date": ["2019-10-04", "2019-10-31"],
+            "day": 5,
+            "repeat": 2,
+            "timeslot": ["12:30", "14:30"],
+            "title": "COMP3250",
+            "remarks": "Data Structure and Algorithms",
+            "location": "CPD-LG18"
+        }
+    ]
+}
