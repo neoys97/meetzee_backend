@@ -54,6 +54,40 @@ let getTimeDelta = (duration) => {
 };
 
 /**
+ * Users manipulation function
+ * _______________________________________________________________________________________
+ */
+
+let extractTimeList = (users, listOfDates) => {
+    let timeList = [];
+    for (var i = 0; i < users.length; i++) {
+        for (var j = 0; j < listOfDates.length; j++) {
+            let temp = users[i].schedule[listOfDates[j]];
+            for (var k = 0; k < temp.length; k++) {
+                temp[k].start = moment(listOfDates[j] + " " + temp[k].start, "YYYY-MM-DD HH:mm:ss");
+                temp[k].end = moment(listOfDates[j] + " " + temp[k].end, "YYYY-MM-DD HH:mm:ss");
+            }
+            timeList.push(...temp);
+        }
+    }
+    return timeList;
+};
+
+let extractEventsID = (users, listOfDates) => {
+    let eventsID = [];
+    for (var i = 0; i < users.length; i++) {
+        for (var j = 0; j < listOfDates.length; j++) {
+            let temp = users[i].events[listOfDates[j]];
+            if (temp) eventsID.push(...temp);
+        }
+    }
+    eventsID = Array.from(new Set(eventsID))
+    return eventsID;
+};
+
+
+
+/**
  * Timeslot manipulation function
  * _______________________________________________________________________________________
  */
@@ -115,21 +149,6 @@ let inverseTimeList = (listOfTimeList) => {
     return inversedTimeList;
 };
 
-let extractTimeList = (users, listOfDates) => {
-    let timeList = [];
-    for (var i = 0; i < users.length; i++) {
-        for (var j = 0; j < listOfDates.length; j++) {
-            let temp = users[i].schedule[listOfDates[j]];
-            for (var k = 0; k < temp.length; k++) {
-                temp[k].start = moment(listOfDates[j] + " " + temp[k].start, "YYYY-MM-DD HH:mm:ss");
-                temp[k].end = moment(listOfDates[j] + " " + temp[k].end, "YYYY-MM-DD HH:mm:ss");
-            }
-            timeList.push(...temp);
-        }
-    }
-    return timeList;
-};
-
 let getFreeTimeList = (listOfTimeList, durationDelta) => {
     let freeTimeList = [];
     for (var i = 0; i < listOfTimeList.length; i++) {
@@ -139,6 +158,28 @@ let getFreeTimeList = (listOfTimeList, durationDelta) => {
         }
     }
     return freeTimeList;
+};
+
+let checkTimeSlotClash = (listOfFreeTimeList, timeslot) => {
+    let clash = true;
+    for (var i = 0; i < listOfFreeTimeList.length; i++) {
+        if (listOfFreeTimeList[i].start < timeslot.start) {
+            if (listOfFreeTimeList[i].end >= timeslot.end) {
+                clash = false;
+                break;
+            }
+        }
+    }
+    return clash;
+};
+
+let convertToTimeslotObject = (start, end, location) => {
+    let timeSlotObject = {};
+    timeSlotObject.start = moment(start,"YYYY-MM-DD HH-mm-ss");
+    timeSlotObject.end = moment(end,"YYYY-MM-DD HH-mm-ss");
+    timeSlotObject.start_location = location;
+    timeSlotObject.end_location = location;
+    return timeSlotObject;
 };
 
 /**
@@ -209,5 +250,8 @@ module.exports = {
     extractTimeList,
     inverseTimeList,
     getTimeDelta,
-    getFreeTimeList
+    getFreeTimeList,
+    extractEventsID,
+    checkTimeSlotClash,
+    convertToTimeslotObject
 };

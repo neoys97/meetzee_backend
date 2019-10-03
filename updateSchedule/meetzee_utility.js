@@ -75,6 +75,7 @@ let mergeSingleTimeslot = (listOfTimeslot) => {
         if (mergedTimeslot[mergedTimeslot.length - 1].end >= currSlot.start) {
             if (mergedTimeslot[mergedTimeslot.length - 1].end < currSlot.end) {
                 mergedTimeslot[mergedTimeslot.length - 1].end = currSlot.end.clone();
+                mergedTimeslot[mergedTimeslot.length - 1].end_location = currSlot.end_location;
             }
         }
         else {
@@ -133,9 +134,6 @@ let getFreeTimeList = (listOfTimeList, durationDelta) => {
     let freeTimeList = [];
     for (var i = 0; i < listOfTimeList.length; i++) {
         let tempDelta = listOfTimeList[i].end - listOfTimeList[i].start;
-        console.log(tempDelta);
-        console.log(durationDelta);
-        console.log(tempDelta >= durationDelta);
         if (tempDelta >= durationDelta) {
             freeTimeList.push(listOfTimeList[i]);
         }
@@ -181,11 +179,15 @@ let routinesToSchedule = (listOfRoutine) => {
                 schedule[key].push({
                     start: moment((key + " " +routine.timeslot[0]), "YYYY-MM-DD HH:mm:ss"),
                     end: moment((key + " " +routine.timeslot[1]), "YYYY-MM-DD HH:mm:ss"),
+                    start_location: routine.location,
+                    end_location: routine.location
                 })
             } else {
                 schedule[key] = [{
                     start: moment((key + " " +routine.timeslot[0]), "YYYY-MM-DD HH:mm:ss"),
                     end: moment((key + " " +routine.timeslot[1]), "YYYY-MM-DD HH:mm:ss"),
+                    start_location: routine.location,
+                    end_location: routine.location
                 }]
             }
             curr = curr.add(repeat_days,"days");

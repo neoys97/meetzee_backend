@@ -110,6 +110,23 @@ Resources:
           Properties:
             Path: /findSlot
             Method: get
+  
+  setEventFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: setEventFunction
+      CodeUri: setEvent/
+      Handler: setEvent.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        updateScheduleFunction:
+          Type: Api
+          Properties:
+            Path: /setEvent
+            Method: get
 
 Outputs:
   firestoreConnectionTestApi:
@@ -153,3 +170,10 @@ Outputs:
   findSlotFunction:
     Description: "find slot Lambda Function ARN"
     Value: !GetAtt findSlotFunction.Arn
+
+  setEventApi:
+    Description: "API Gateway endpoint URL for Prod stage for set event function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/setEvent/"
+  findSlotFunction:
+    Description: "set event Lambda Function ARN"
+    Value: !GetAtt setEventFunction.Arn

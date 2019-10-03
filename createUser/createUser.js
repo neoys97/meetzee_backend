@@ -45,6 +45,8 @@ exports.lambdaHandler = async (event, context, callback) => {
     } else {
       return await userRef.set(
         {
+          "events": [],
+          "friends": [],
           "password": password,
           "timestamp": moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss")
         }

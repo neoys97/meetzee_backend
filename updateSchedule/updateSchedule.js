@@ -60,7 +60,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   //   repeat: 2,
   //   timeslot: ["10:00", "12:00"],
   //   title: "ENGG1120",
-  //   remarks: "electrical boring course"
+  //   remarks: "electrical boring course",
   //   location: "CYC112"
   // },
   // {
@@ -69,7 +69,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   //   repeat: 1,
   //   timeslot: ["13:00", "14:00"],
   //   title: "ENGG1190",
-  //   remarks: "electronic stupid course"
+  //   remarks: "electronic stupid course",
   //   location: "CYC123"
   // },
   // {
@@ -78,7 +78,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   //   repeat: 2,
   //   timeslot: ["08:00", "15:00"],
   //   title: "COMP3330",
-  //   remarks: "some random stupid course"
+  //   remarks: "some random stupid course",
   //   location: "JSL123"
   // },
   // {
@@ -87,7 +87,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   //   repeat: 1,
   //   timeslot: ["16:00", "17:00"],
   //   title: "COMP3241",
-  //   remarks: "some new random stupid course"
+  //   remarks: "some new random stupid course",
   //   location: "CPD123"
   // },
   // ];
