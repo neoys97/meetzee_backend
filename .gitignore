@@ -133,3 +133,7 @@ event.json
 documentdbConnectionTest/rds-combined-ca-bundle.pem
 firestoreConnectionTest/serviceAccount.json
 createUser/serviceAccount.json
+updateSchedule/serviceAccount.json
+setEvent/serviceAccount.json
+loginUser/serviceAccount.json
+updateFriends/serviceAccount.json

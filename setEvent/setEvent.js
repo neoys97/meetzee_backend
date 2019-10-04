@@ -67,7 +67,7 @@ exports.lambdaHandler = async (event, context, callback) => {
     date: "2019-10-01",
     timeslot: ["20:00:00", "21:00:00"],
     location: "",
-    title: "Competition meeting",
+    title: "Pre Competition meeting",
     remarks: ""
   };
 
@@ -132,16 +132,22 @@ exports.lambdaHandler = async (event, context, callback) => {
         message: "error in getting events document"
       });
       await lockRef.update({locked: 0});
-      return response
+      return response;
   });
 
   let timeList = meetzee_util.extractTimeList(user_arg, [new_event.date]);
   
+  for (var i = 0; i < all_events.length; i++) {
+    let tmp = meetzee_util.convertToTimeslotObject(all_events[i].date + " " + all_events[i].timeslot[0], all_events[i].date + " " + all_events[i].timeslot[1], all_events[i].location);
+    timeList.push(tmp);
+  }
+
   let eventSlot = meetzee_util.convertToTimeslotObject(new_event.date + " " + new_event.timeslot[0], new_event.date + " " + new_event.timeslot[1], new_event.location);
-
+  
   let mergedTimeList = meetzee_util.mergeSingleTimeslot(timeList);
+  
   let inversedTimeList = meetzee_util.inverseTimeList(mergedTimeList);
-
+  console.log(inversedTimeList);
   let clash = meetzee_util.checkTimeSlotClash(inversedTimeList, eventSlot);
   if (clash) {
     response.body = JSON.stringify({
@@ -152,7 +158,7 @@ exports.lambdaHandler = async (event, context, callback) => {
     return response;
   }
 
-  console.log(1);
+  new_event.timestamp = moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss");
   let eventSnapshot = await eventRef.add(new_event);
   let batch = db.batch();
   for (var i = 0; i < userIds.length; i++) {
@@ -165,7 +171,8 @@ exports.lambdaHandler = async (event, context, callback) => {
     }
     let modify_event_key = "events." + new_event.date;
     batch.update(userRef.doc(userIds[i]), {
-      [modify_event_key] : modify_event
+      [modify_event_key] : modify_event,
+      "timestamp": moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss")
     });
   }
 
@@ -177,21 +184,5 @@ exports.lambdaHandler = async (event, context, callback) => {
   await batch.commit();
   await lockRef.update({locked: 0});
 
-  // let freeTimeList = meetzee_util.getFreeTimeList(inversedTimeList, durationDelta);
-  
-  // if (freeTimeList) {
-  //   response.body = JSON.stringify({
-  //     status: 1,
-  //     availableTime: freeTimeList,
-  //     message: "successful operation"
-  //   });
-  // }
-  // else {
-  //   response.body = JSON.stringify({
-  //     status: 2,
-  //     message: "No available time slot"
-  //   });
-  // }
   return response;
-  // }
 }

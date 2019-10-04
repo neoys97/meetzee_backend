@@ -163,7 +163,7 @@ let getFreeTimeList = (listOfTimeList, durationDelta) => {
 let checkTimeSlotClash = (listOfFreeTimeList, timeslot) => {
     let clash = true;
     for (var i = 0; i < listOfFreeTimeList.length; i++) {
-        if (listOfFreeTimeList[i].start < timeslot.start) {
+        if (listOfFreeTimeList[i].start <= timeslot.start) {
             if (listOfFreeTimeList[i].end >= timeslot.end) {
                 clash = false;
                 break;
