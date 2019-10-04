@@ -1,34 +1,28 @@
 /**
- * update user's schedule on the firestore, MUST pass ALL ROUTINES to this function
+ * set event for different users
  * - add firestore credential in current directory and rename it as serviceAccount.json
  * 
  * Required JSON key:
- * userId               : user's ID
- * routines             : list of user's routines
- * example of routines  : [{
- *    date: ["2019-09-23", "2019-10-23"],
- *    day: 5,
- *    repeat: 3,
- *    timeslot: ["08:00", "09:00"],
- *    title: "COMP5330",
- *    remarks: "some random new course"
- *    location: "KKL312"
- * }, {...}]
- * Indicators: 
- * days => 0 = Sunday         repeat => 0 = None
- *         1 = Monday                   1 = Daily
- *         2 = Tuesday                  2 = Weekly
- *         3 = Wednesday                3 = Monthly
- *         4 = Thursday
- *         5 = Friday
- *         6 = Saturday
+ * userIds              : list of users' ID
+ * new_event            : JSON object of new event to be added
+ * 
+ * Example of JSON      : {
+ *    userIds     : ["yoshi_pika", "mario_torch", "luigi_toto"],
+ *    new_event   : {
+ *      date    : "2019-10-01",
+ *      timeslot: ["20:00:00", "21:00:00"],
+ *      location: "",
+ *      title   : "Pre Competition meeting",
+ *      remarks : ""
+ *    }
+ * }
  * 
  * Returned JSON format:
- * status   : 0 => failed operation, routines is empty 
- *            1 => successful operation
- *            2 => failed operation
- * 
+ * status   : -1  => server is busy
+ *             0  => failed operation 
+ *             1  => successful operation
  */
+
 const admin = require('firebase-admin');
 const serviceAccount = require('./serviceAccount.json');
 const moment = require('moment');
@@ -62,17 +56,17 @@ exports.lambdaHandler = async (event, context, callback) => {
     return response;
   }
 
-  let userIds = ["yoshi_pika", "mario_torch", "luigi_toto"];
-  let new_event = {
-    date: "2019-10-01",
-    timeslot: ["20:00:00", "21:00:00"],
-    location: "",
-    title: "Pre Competition meeting",
-    remarks: ""
-  };
+  // let userIds = ["yoshi_pika", "mario_torch", "luigi_toto"];
+  // let new_event = {
+  //   date: "2019-10-01",
+  //   timeslot: ["20:00:00", "21:00:00"],
+  //   location: "",
+  //   title: "Pre Competition meeting",
+  //   remarks: ""
+  // };
 
-  // let userId = event.userId;
-  // let routines = event.routines;
+  let userIds = event.userIds;
+  let new_event = event.new_event;
 
   if (!new_event) {
     response.body = JSON.stringify({

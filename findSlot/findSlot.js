@@ -1,34 +1,30 @@
 /**
- * update user's schedule on the firestore, MUST pass ALL ROUTINES to this function
+ * find user's available time slot
  * - add firestore credential in current directory and rename it as serviceAccount.json
  * 
  * Required JSON key:
- * userId               : user's ID
- * routines             : list of user's routines
- * example of routines  : [{
- *    date: ["2019-09-23", "2019-10-23"],
- *    day: 5,
- *    repeat: 3,
- *    timeslot: ["08:00", "09:00"],
- *    title: "COMP5330",
- *    remarks: "some random new course"
- *    location: "KKL312"
- * }, {...}]
+ * userIds              : list of users' ID
+ * duration             : how long the event is
+ * dates                : list of 2 dates, starting and ending date
+ * 
+ * Example of JSON      : {
+ *    userIds     : ["yoshi_pika", "mario_torch", "luigi_toto"],
+ *    duration    : "01:00:00",
+ *    dates       : ["2019-10-01", "2019-10-01"]
+ * }
+ * 
  * Indicators: 
- * days => 0 = Sunday         repeat => 0 = None
- *         1 = Monday                   1 = Daily
- *         2 = Tuesday                  2 = Weekly
- *         3 = Wednesday                3 = Monthly
- *         4 = Thursday
- *         5 = Friday
- *         6 = Saturday
+ * duration : "HH:mm:ss"
+ * dates    : [start, end]
  * 
  * Returned JSON format:
- * status   : 0 => failed operation, routines is empty 
+ * status   : 0 => failed operation 
  *            1 => successful operation
- *            2 => failed operation
- * 
+ *            2 => failed operation, no available timeslot
+ * if operation is successful
+ * availableTime: list of available time slot
  */
+
 const admin = require('firebase-admin');
 const serviceAccount = require('./serviceAccount.json');
 const moment = require('moment');
@@ -42,12 +38,15 @@ db.settings({timestampsInSnapshots: true});
 
 exports.lambdaHandler = async (event, context, callback) => {
   
-  let userIds = ["yoshi_pika", "mario_torch", "luigi_toto"];
-  let duration = "05:00:00";
-  let bufferTime = "00:10:00";
-  let dates = ["2019-10-01", "2019-10-01"];
-  // let userId = event.userId;
-  // let routines = event.routines;
+  // let userIds = ["yoshi_pika", "mario_torch", "luigi_toto"];
+  // let duration = "05:00:00";
+  // let bufferTime = "00:10:00";
+  // let dates = ["2019-10-01", "2019-10-01"];
+
+  let userIds = event.userIds;
+  let duration = event.duration;
+  let bufferTime = event.bufferTime;
+  let dates = event.dates;
 
   let response = {
     statusCode: 200
@@ -117,7 +116,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   
   let durationDelta = meetzee_util.getTimeDelta(duration);
   // buffer time
-  let bufferTimeDelta = meetzee_util.getTimeDelta(bufferTime);
+  // let bufferTimeDelta = meetzee_util.getTimeDelta(bufferTime);
 
   let freeTimeList = meetzee_util.getFreeTimeList(inversedTimeList, durationDelta);
 
