@@ -53,6 +53,19 @@ let getTimeDelta = (duration) => {
     return returnValue;
 };
 
+let findSmallestDifference = (numbers) => {
+    var smallest = 999999;
+    for (var i = 0; i < numbers.length - 1; i++) {
+        for (var j = i + 1; j < numbers.length; j++) {
+            let curr = Math.abs(numbers[i] - numbers[j]);
+            if (smallest > curr) {
+                smallest = curr;
+            }
+        }
+    }
+    return smallest;
+};
+
 /**
  * Users manipulation function
  * _______________________________________________________________________________________
@@ -243,6 +256,82 @@ let routinesToSchedule = (listOfRoutine) => {
     return schedule;
 };
 
+/**
+ * Location related function
+ * _______________________________________________________________________________________
+ */
+
+let getMostRecentLocation = (timeList, timeSlot) => {
+    let location;
+    let index;
+    for (var i = 0; i < timeList.length; i++) {        
+        if (timeList[i].end > timeSlot.start) {
+            index = i - 1;
+            break;
+        }
+    }
+    return timeList[index].end_location;
+};
+
+let getSuggestedLocation = (location_map, location_list) => {
+    let combined_distance = {};
+    for (var i = 0; i < location_list.length; i++) {
+        let curr = location_map[location_list[i]];
+        for (var k in curr) {
+            if (combined_distance[k]) {
+                combined_distance[k] += curr[k];
+            } 
+            else {
+                combined_distance[k] = curr[k];
+            }
+        }
+    }
+    let smallest_locations = [];
+    let smallest_distance = 999999;
+    for (var k in combined_distance) {
+        if (combined_distance[k] < smallest_distance) {
+            smallest_distance = combined_distance[k];
+        }
+    }
+
+    for (var k in combined_distance) {
+        if (combined_distance[k] == smallest_distance) {
+            smallest_locations.push(k);
+        }
+    }
+    let smallest = 999999;
+    let smallest_loc = "";
+    for (var i = 0; i < smallest_locations.length; i++) {
+        let dist_list = [];
+        for (var j = 0; j < location_list.length; j++) {
+            dist_list.push(location_map[location_list[j]][smallest_locations[i]]);
+        }
+        let curr = findSmallestDifference(dist_list);
+        if (smallest > curr) {
+            smallest = curr;
+            smallest_loc = smallest_locations[i];
+        }
+    }
+    return smallest_loc;
+};
+
+let getSuggestedLocationv2 = (location_map, location_list) => {  
+    let smallest = 999999;
+    let smallest_loc = "";
+    for (var k in location_map) {
+        let dist_list = [];
+        for (var j = 0; j < location_list.length; j++) {
+            dist_list.push(location_map[location_list[j]][k]);
+        }
+        let curr = findSmallestDifference(dist_list);
+        if (smallest > curr) {
+            smallest = curr;
+            smallest_loc = k;
+        }
+    }
+    return smallest_loc;
+};
+
 module.exports = {
     routinesToSchedule,
     mergeSingleTimeslot,
@@ -253,5 +342,7 @@ module.exports = {
     getFreeTimeList,
     extractEventsID,
     checkTimeSlotClash,
-    convertToTimeslotObject
+    convertToTimeslotObject,
+    getMostRecentLocation,
+    getSuggestedLocation
 };
