@@ -138,3 +138,5 @@ setEvent/serviceAccount.json
 loginUser/serviceAccount.json
 updateFriends/serviceAccount.json
 findSlot/serviceAccount.json
+deleteEvent/serviceAccount.json
+getUserData/serviceAccount.json

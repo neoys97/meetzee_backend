@@ -105,7 +105,7 @@ Resources:
         - AWSLambdaVPCAccessExecutionRole
       MemorySize: 256
       Events:
-        updateScheduleFunction:
+        findSlotFunction:
           Type: Api
           Properties:
             Path: /findSlot
@@ -122,7 +122,7 @@ Resources:
         - AWSLambdaVPCAccessExecutionRole
       MemorySize: 256
       Events:
-        updateScheduleFunction:
+        setEventFunction:
           Type: Api
           Properties:
             Path: /setEvent
@@ -139,10 +139,27 @@ Resources:
         - AWSLambdaVPCAccessExecutionRole
       MemorySize: 256
       Events:
-        updateScheduleFunction:
+        deleteEventFunction:
           Type: Api
           Properties:
             Path: /deleteEvent
+            Method: get
+
+  getUserDataFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: getUserDataFunction
+      CodeUri: getUserData/
+      Handler: getUserData.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        getUserDataFunction:
+          Type: Api
+          Properties:
+            Path: /getUserData
             Method: get
 
 Outputs:
@@ -201,3 +218,10 @@ Outputs:
   findSlotFunction:
     Description: "delete event Lambda Function ARN"
     Value: !GetAtt deleteEventFunction.Arn
+
+  getUserDataApi:
+    Description: "API Gateway endpoint URL for Prod stage for get user data function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/getUserData/"
+  getUserDataFunction:
+    Description: "get user data Lambda Function ARN"
+    Value: !GetAtt getUserDataFunction.Arn
