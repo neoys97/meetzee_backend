@@ -63,9 +63,9 @@ exports.lambdaHandler = async (event, context, callback) => {
   // let userIds = ["yoshi_pika", "mario_torch", "luigi_toto"];
   // let new_event = {
   //   date: "2019-10-01",
-  //   timeslot: ["18:30:00", "19:00:00"],
+  //   timeslot: ["08:00:00", "08:30:00"],
   //   location: "",
-  //   title: "Evening stupid event",
+  //   title: "Morning stupid event",
   //   remarks: ""
   // };
 
@@ -169,6 +169,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   }
 
   new_event.timestamp = moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss");
+  new_event.participants = userIds;
   let eventSnapshot = await eventRef.add(new_event);
   let batch = db.batch();
   for (var i = 0; i < userIds.length; i++) {

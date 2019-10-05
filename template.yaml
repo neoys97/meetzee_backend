@@ -127,6 +127,23 @@ Resources:
           Properties:
             Path: /setEvent
             Method: get
+  
+  deleteEventFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: deleteEventFunction
+      CodeUri: deleteEvent/
+      Handler: deleteEvent.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        updateScheduleFunction:
+          Type: Api
+          Properties:
+            Path: /deleteEvent
+            Method: get
 
 Outputs:
   firestoreConnectionTestApi:
@@ -177,3 +194,10 @@ Outputs:
   findSlotFunction:
     Description: "set event Lambda Function ARN"
     Value: !GetAtt setEventFunction.Arn
+
+  deleteEventApi:
+    Description: "API Gateway endpoint URL for Prod stage for delete event function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/deleteEvent/"
+  findSlotFunction:
+    Description: "delete event Lambda Function ARN"
+    Value: !GetAtt deleteEventFunction.Arn
