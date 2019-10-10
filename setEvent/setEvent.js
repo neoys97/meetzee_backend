@@ -11,6 +11,7 @@
  *    new_event   : {
  *      date    : "2019-10-01",
  *      timeslot: ["20:00:00", "21:00:00"],
+ *      host    : "yoshi_pika",
  *      location: "",
  *      title   : "Pre Competition meeting",
  *      remarks : ""

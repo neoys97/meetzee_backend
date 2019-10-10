@@ -1,0 +1,26 @@
+yoshi_pika, luigi_toto, mario_torch
+
+{
+    userIds     : ["yoshi_pika", "mario_torch", "luigi_toto"],
+    new_event   : {
+        date    : "2019-10-01",
+        timeslot: ["20:00:00", "21:00:00"],
+        host    : "yoshi_pika",
+        location: "",
+        title   : "Pre Competition meeting",
+        remarks : ""
+    }
+}
+
+{
+    userIds     : ["yoshi_pika", "mario_torch", "luigi_toto"],
+    new_event   : {
+        date    : "2019-10-01",
+        timeslot: ["18:30:00", "19:00:00"],
+        host    : "luigi_toto",
+        location: "",
+        title   : "Some stupid evening event",
+        remarks : ""
+    }
+}
+

@@ -140,3 +140,4 @@ updateFriends/serviceAccount.json
 findSlot/serviceAccount.json
 deleteEvent/serviceAccount.json
 getUserData/serviceAccount.json
+reschedule_algo/node_modules

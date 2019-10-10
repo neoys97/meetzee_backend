@@ -1,0 +1,111 @@
+createUserFunction:
+{
+    "userId": "magikarp_psy",
+    "password": "psyduck"
+}
+
+updateScheduleFunction:
+{
+    "userId": "magikarp_psy",
+    "routines": [
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 1,
+            "timeslot": ["00:00", "07:00"],
+            "title": "Rest time",
+            "remarks": "",
+            "location": ""
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 1,
+            "timeslot": ["23:00", "24:00"],
+            "title": "Rest time",
+            "remarks": "",
+            "location": ""
+        },
+        {
+            "date": ["2019-10-07", "2019-10-31"],
+            "day": 1,
+            "repeat": 2,
+            "timeslot": ["09:30", "11:30"],
+            "title": "COMP3228",
+            "remarks": "",
+            "location": "MW"
+        },
+        {
+            "date": ["2019-10-07", "2019-10-31"],
+            "day": 1,
+            "repeat": 2,
+            "timeslot": ["12:30", "14:30"],
+            "title": "ELEC3342",
+            "remarks": "",
+            "location": "LB"
+        },
+        {
+            "date": ["2019-10-07", "2019-10-31"],
+            "day": 1,
+            "repeat": 2,
+            "timeslot": ["18:30", "21:30"],
+            "title": "ELEC3844",
+            "remarks": "",
+            "location": "LB"
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 2,
+            "timeslot": ["10:30", "12:30"],
+            "title": "COMP3352",
+            "remarks": "",
+            "location": "CB"
+        },
+        {
+            "date": ["2019-10-01", "2019-10-31"],
+            "day": 2,
+            "repeat": 2,
+            "timeslot": ["13:30", "15:30"],
+            "title": "COMP3355",
+            "remarks": "",
+            "location": "MB"
+        },
+        {
+            "date": ["2019-10-03", "2019-10-31"],
+            "day": 4,
+            "repeat": 2,
+            "timeslot": ["09:30", "10:30"],
+            "title": "COMP3278",
+            "remarks": "",
+            "location": "MW"
+        },
+        {
+            "date": ["2019-10-03", "2019-10-31"],
+            "day": 4,
+            "repeat": 2,
+            "timeslot": ["10:30", "12:30"],
+            "title": "COMP3352",
+            "remarks": "",
+            "location": "CB"
+        },
+        {
+            "date": ["2019-10-03", "2019-10-31"],
+            "day": 4,
+            "repeat": 2,
+            "timeslot": ["12:30", "13:30"],
+            "title": "ELEC3342",
+            "remarks": "",
+            "location": "LE"
+        },
+        {
+            "date": ["2019-10-04", "2019-10-31"],
+            "day": 5,
+            "repeat": 2,
+            "timeslot": ["14:30", "15:30"],
+            "title": "ELEC3355",
+            "remarks": "",
+            "location": "MB"
+        },
+    ]
+}

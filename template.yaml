@@ -103,7 +103,7 @@ Resources:
       Runtime: nodejs8.10
       Policies:
         - AWSLambdaVPCAccessExecutionRole
-      MemorySize: 256
+      MemorySize: 384
       Events:
         findSlotFunction:
           Type: Api
