@@ -37,7 +37,6 @@ exports.lambdaHandler = async (event, context, callback) => {
       status: 0,
       message: "user ID cannot be empty"
     });
-    await lockRef.update({locked: 0});
     return response;
   }
 

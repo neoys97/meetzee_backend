@@ -162,6 +162,23 @@ Resources:
             Path: /getUserData
             Method: get
 
+  modifyEventFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: modifyEventFunction
+      CodeUri: modifyEvent/
+      Handler: modifyEvent.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        modifyEventFunction:
+          Type: Api
+          Properties:
+            Path: /modifyEvent
+            Method: get
+
 Outputs:
   firestoreConnectionTestApi:
     Description: "API Gateway endpoint URL for Prod stage for documentdbConnectionTest function"
@@ -225,3 +242,10 @@ Outputs:
   getUserDataFunction:
     Description: "get user data Lambda Function ARN"
     Value: !GetAtt getUserDataFunction.Arn
+
+  modifyEventApi:
+    Description: "API Gateway endpoint URL for Prod stage for modify event function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/modifyEvent/"
+  modifyEventFunction:
+    Description: "modify event Lambda Function ARN"
+    Value: !GetAtt modifyEventFunction.Arn
