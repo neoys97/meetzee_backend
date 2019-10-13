@@ -11,8 +11,9 @@
  *    repeat: 3,
  *    timeslot: ["08:00", "09:00"],
  *    title: "COMP5330",
- *    remarks: "some random new course"
- *    location: "KKL312"
+ *    remarks: "some random new course",
+ *    location: "KKL312",
+ * importance: "very important"
  * }, {...}]
  * Indicators: 
  * days => 0 = Sunday         repeat => 0 = None

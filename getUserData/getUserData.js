@@ -41,13 +41,28 @@ exports.lambdaHandler = async (event, context, callback) => {
   }
 
   const userRef = db.collection('users');
+  const eventRef = db.collection('events');
 
   let userSnapshot = await userRef.doc(userId).get();
+  let eventPromises = [];
+  for (var k in userSnapshot.data().events) {
+    for (var id of userSnapshot.data().events[k]) {
+      const p = eventRef.doc(id).get();
+      eventPromises.push(p);
+    }
+  }
+
+  let eventSnapshot = await Promise.all(eventPromises);
+  let eventData = [];
+  for (var ele of eventSnapshot) {
+    eventData.push(ele.data());
+  }
 
   response.body = JSON.stringify({
     status: 1,
     message: "operation successful",
-    userData: userSnapshot.data()
+    userData: userSnapshot.data(),
+    eventsData: eventData
   });
 
   return response;

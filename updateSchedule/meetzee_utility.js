@@ -211,7 +211,7 @@ let routinesToSchedule = (listOfRoutine) => {
         let endDate = moment(routine.date[1], "YYYY-MM-DD").utc();
         let curr = startDate;
 
-        let repeat_days = 0;
+        let repeat_days = 1;
         switch (routine.repeat) {
             case 1:
                 repeat_days = 1;
@@ -223,7 +223,7 @@ let routinesToSchedule = (listOfRoutine) => {
                 repeat_days = 30;
                 break;
             default:
-                repeat_days = 0;
+                repeat_days = 1;
                 break;
         }
 

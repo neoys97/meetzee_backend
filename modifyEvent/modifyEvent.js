@@ -9,6 +9,9 @@
  *    remarks: "new remarks",
  *    title: "new title"
  * }
+ * Do not pass in the key value if there is no modification needed
+ * eg. if you want to change only the location, pass only the location
+ * 
  * Returned JSON format:
  * status   : 0  => failed operation 
  *            1  => successful operation
