@@ -1,0 +1,77 @@
+yoshi_pika, luigi_toto, mario_torch
+
+{
+    "userIds"     : ["yoshi_pika", "mario_torch", "luigi_toto"],
+    "new_event"   : {
+        "date"    : "2019-10-01",
+        "timeslot": ["08:00:00", "09:30:00"],
+        "host"    : "yoshi_pika",
+        "location": "",
+        "title"   : "Pre Competition meeting",
+        "remarks" : ""
+    }
+}
+
+{
+    "userIds"     : ["yoshi_pika", "mario_torch", "luigi_toto"],
+    "new_event"   : {
+        "date"    : "2019-10-01",
+        "timeslot": ["18:30:00", "20:30:00"],
+        "host"    : "luigi_toto",
+        "location": "",
+        "title"   : "Some stupid evening event",
+        "remarks" : ""
+    }
+}
+
+vulpix_squirt, mario_torch
+
+{
+    "userIds"     : ["vulpix_squirt", "mario_torch"],
+    "new_event"   : {
+        "date"    : "2019-10-01",
+        "timeslot": ["16:30:00", "17:00:00"],
+        "host"    : "vulpix_squirt",
+        "location": "",
+        "title"   : "New vulpix skill set",
+        "remarks" : ""
+    }
+}
+
+{
+    "userIds"     : ["vulpix_squirt", "mario_torch"],
+    "new_event"   : {
+        "date"    : "2019-10-01",
+        "timeslot": ["17:00:00", "18:00:00"],
+        "host"    : "mario_torch",
+        "location": "",
+        "title"   : "Vulpix uses flamethrower",
+        "remarks" : ""
+    }
+}
+
+vulpix_squirt, yoshi_pika, magikarp_psy
+
+{
+    "userIds"     : ["vulpix_squirt", "yoshi_pika", "magikarp_psy"],
+    "new_event"   : {
+        "date"    : "2019-10-01",
+        "timeslot": ["07:30:00", "08:00:00"],
+        "host"    : "magikarp_psy",
+        "location": "",
+        "title"   : "magikarp use struggle",
+        "remarks" : ""
+    }
+}
+
+{
+    "userIds"     : ["vulpix_squirt", "yoshi_pika", "magikarp_psy"],
+    "new_event"   : {
+        "date"    : "2019-10-01",
+        "timeslot": ["21:00:00", "22:30:00"],
+        "host"    : "magikarp_psy",
+        "location": "",
+        "title"   : "magikarp is very sad",
+        "remarks" : ""
+    }
+}

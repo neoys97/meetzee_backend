@@ -75,7 +75,7 @@ let extractTimeList = (users, listOfDates) => {
     let timeList = [];
     for (var i = 0; i < users.length; i++) {
         for (var j = 0; j < listOfDates.length; j++) {
-            let temp = users[i].schedule[listOfDates[j]];
+            let temp = JSON.parse(JSON.stringify(users[i].schedule[listOfDates[j]]));
             for (var k = 0; k < temp.length; k++) {
                 temp[k].start = moment(listOfDates[j] + " " + temp[k].start, "YYYY-MM-DD HH:mm:ss");
                 temp[k].end = moment(listOfDates[j] + " " + temp[k].end, "YYYY-MM-DD HH:mm:ss");
@@ -98,7 +98,10 @@ let extractEventsID = (users, listOfDates) => {
     return eventsID;
 };
 
-
+let extractGroupIDFromEvent = (event) => {
+    event.participants.sort();
+    return (event.participants.join(""))
+};
 
 /**
  * Timeslot manipulation function
@@ -333,6 +336,7 @@ let getSuggestedLocationv2 = (location_map, location_list) => {
 };
 
 module.exports = {
+    compareTimeSlots,
     routinesToSchedule,
     mergeSingleTimeslot,
     generateListOfDates,
@@ -344,5 +348,6 @@ module.exports = {
     checkTimeSlotClash,
     convertToTimeslotObject,
     getMostRecentLocation,
-    getSuggestedLocation
+    getSuggestedLocation,
+    extractGroupIDFromEvent
 };

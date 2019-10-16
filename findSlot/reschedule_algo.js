@@ -109,7 +109,7 @@ let checkRescheduleFeasibility = (schedule, events, victim_ids, target_duration)
     let currSchedule = schedule;
     for (var k in events) {
         if (victim_ids.includes(k)) continue;
-        currSchedule.push(events[k]);
+        currSchedule.push(meetzee_util.convertToTimeslotObject(events[k].date + " " + events[k].timeslot[0], events[k].date + " " + events[k].timeslot[1], events[k].location));
     }
     let tmpCurrSchedule = deepCopyScheduleArray(currSchedule);
     let availableTime = meetzee_util.inverseTimeList(meetzee_util.mergeSingleTimeslot(tmpCurrSchedule));
@@ -118,25 +118,24 @@ let checkRescheduleFeasibility = (schedule, events, victim_ids, target_duration)
         let checkSchedule = deepCopyScheduleArray(currSchedule);
         checkSchedule.push(slot);
         checkSchedule = meetzee_util.inverseTimeList(meetzee_util.mergeSingleTimeslot(checkSchedule));
-        let resolved = false;
         var possibleRescheduleTimeSlot = {};
         for (var victim_id of victim_ids) {
-            let tmpDuration = events[victim_id].end - events[victim_id].start;
-            possibleRescheduleTimeSlot[victim_id] = atomiseAvailableTime(checkSchedule, GLOBAL_DISCRETE_DELTA, tmpDuration);          
+            let tmpDuration = events[victim_id].timeSlot.end - events[victim_id].timeSlot.start;
+            possibleRescheduleTimeSlot[victim_id] = atomiseAvailableTime(checkSchedule, GLOBAL_DISCRETE_DELTA, tmpDuration);       
         }
         /** Only works for 2 events reschedule, MAKE CHANGES if going to scale up */
         let possibleEventKeys = Object.keys(possibleRescheduleTimeSlot);
         let possibleResult = [];
         if (possibleEventKeys.length == 1) {
             if (possibleRescheduleTimeSlot[possibleEventKeys[0]].length != 0) {
-                console.log("found");
+                // console.log("found");
                 let returnValue = {};
                 returnValue["new_event"] = slot;
                 returnValue[possibleEventKeys[0]] = possibleRescheduleTimeSlot[possibleEventKeys[0]][0];
                 return returnValue;
             }
             else {
-                console.log("None");
+                // console.log("None");
                 return (null);
             }
         }
@@ -152,7 +151,7 @@ let checkRescheduleFeasibility = (schedule, events, victim_ids, target_duration)
             }
             for (var posSlot of possibleResult) {
                 if (checkPossibleRescheduleClash(posSlot)) {
-                    console.log("found too");
+                    // console.log("found too");
                     let returnValue = posSlot;
                     returnValue["new_event"] = slot;
                     return (returnValue);
@@ -160,7 +159,7 @@ let checkRescheduleFeasibility = (schedule, events, victim_ids, target_duration)
             }    
         } 
     }
-    console.log("None");
+    // console.log("None");
     return (null);
 };
 
@@ -185,7 +184,6 @@ let rescheduleBruteForce = (schedule, events, target_duration) => {
         rescheduleResult = checkRescheduleFeasibility (tmp_schedule, events, victim, target_duration);
         if (rescheduleResult != null) break;
     } 
-    rescheduleResult = checkRescheduleFeasibility (schedule, events, eventsSet[9], target_duration);
     return rescheduleResult;
 };
 

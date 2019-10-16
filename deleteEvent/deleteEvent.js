@@ -8,7 +8,7 @@
  * 
  * Example of JSON      : {
  *    userIds     : ["yoshi_pika", "mario_torch"],
- *    duration    : "F21O17dndT5ly2i141PA",
+ *    eventId     : "F21O17dndT5ly2i141PA"
  * }
  * 
  * Returned JSON format:
@@ -37,7 +37,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   let eventId = event.eventId;  
 
   // let userIds = ["luigi_toto", "mario_torch", "yoshi_pika"];
-  // let eventId = "ZYQHzOqgEPBLiH6mqAyh";
+  // let eventId = "ZYQHzOqgEPH6mqAyh";
 
   if (userIds.length == 0 || !eventId) {
     response.body = JSON.stringify({
@@ -70,6 +70,14 @@ exports.lambdaHandler = async (event, context, callback) => {
 
   let eventSnapshot = await eventRef.doc(eventId).get();
   let event_data = eventSnapshot.data();
+  if (event_data == undefined) {
+    response.body = JSON.stringify({
+      status: -1,
+      message: "no such event"
+    });
+    await lockRef.update({locked: 0});
+    return response;
+  }
 
   let users = {};
   let userPromises = [];
