@@ -131,7 +131,7 @@ let checkRescheduleFeasibility = (schedule, events, victim_ids, target_duration)
                 // console.log("found");
                 let returnValue = {};
                 returnValue["new_event"] = slot;
-                returnValue[possibleEventKeys[0]] = possibleRescheduleTimeSlot[possibleEventKeys[0]][0];
+                returnValue["victim_events"][possibleEventKeys[0]] = possibleRescheduleTimeSlot[possibleEventKeys[0]][0];
                 return returnValue;
             }
             else {
@@ -152,7 +152,8 @@ let checkRescheduleFeasibility = (schedule, events, victim_ids, target_duration)
             for (var posSlot of possibleResult) {
                 if (checkPossibleRescheduleClash(posSlot)) {
                     // console.log("found too");
-                    let returnValue = posSlot;
+                    let returnValue = {};
+                    returnValue["victim_events"] = posSlot;
                     returnValue["new_event"] = slot;
                     return (returnValue);
                 }

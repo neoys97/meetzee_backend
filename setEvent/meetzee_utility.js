@@ -75,12 +75,14 @@ let extractTimeList = (users, listOfDates) => {
     let timeList = [];
     for (var i = 0; i < users.length; i++) {
         for (var j = 0; j < listOfDates.length; j++) {
-            let temp = JSON.parse(JSON.stringify(users[i].schedule[listOfDates[j]]));
-            for (var k = 0; k < temp.length; k++) {
-                temp[k].start = moment(listOfDates[j] + " " + temp[k].start, "YYYY-MM-DD HH:mm:ss");
-                temp[k].end = moment(listOfDates[j] + " " + temp[k].end, "YYYY-MM-DD HH:mm:ss");
+            if (users[i].schedule[listOfDates[j]] != undefined) {
+                let temp = JSON.parse(JSON.stringify(users[i].schedule[listOfDates[j]]));
+                for (var k = 0; k < temp.length; k++) {
+                    temp[k].start = moment(listOfDates[j] + " " + temp[k].start, "YYYY-MM-DD HH:mm:ss");
+                    temp[k].end = moment(listOfDates[j] + " " + temp[k].end, "YYYY-MM-DD HH:mm:ss");
+                }
+                timeList.push(...temp);
             }
-            timeList.push(...temp);
         }
     }
     return timeList;

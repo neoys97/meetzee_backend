@@ -245,12 +245,34 @@ exports.lambdaHandler = async (event, context, callback) => {
   }
 
   if (resolved) {
-    for (var k in rescheduleResult) {
-      rescheduleResult[k].start = rescheduleResult[k].start.format("YYYY-MM-DD HH:mm:ss");
-      rescheduleResult[k].end = rescheduleResult[k].end.format("YYYY-MM-DD HH:mm:ss");
+    rescheduleResult["new_event"].start = rescheduleResult["new_event"].start.format("YYYY-MM-DD HH:mm:ss");
+    rescheduleResult["new_event"].end = rescheduleResult["new_event"].end.format("YYYY-MM-DD HH:mm:ss");
+    for (var k in rescheduleResult["victim_events"]) {
+      rescheduleResult["victim_events"][k].start = rescheduleResult["victim_events"][k].start.format("YYYY-MM-DD HH:mm:ss");
+      rescheduleResult["victim_events"][k].end = rescheduleResult["victim_events"][k].end.format("YYYY-MM-DD HH:mm:ss");
+      rescheduleResult["victim_events"][k].approved = 0;
+      rescheduleResult["victim_events"][k].host = all_events[k].host;
     }
     rescheduleResult.timestamp = moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss");
     let transactionSnapshot = await db.collection("transactions").add(rescheduleResult);
+    
+    let batch = db.batch();
+    for (var k in rescheduleResult["victim_events"]) {
+      let transactionReqId = users[all_events[k].host]["reschedule_req"];
+      if (transactionReqId != undefined) {
+        transactionReqId.push(transactionSnapshot.id);
+        transactionReqId = Array.from(new Set(transactionReqId));
+      }
+      else {
+        transactionReqId = [transactionSnapshot];
+      }
+      batch.update(userRef.doc(all_events[k].host), {
+        "reschedule_req" : transactionReqId,
+        "timestamp": moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss")
+      });
+    }
+    await batch.commit();
+
     response.body = JSON.stringify({
       status: 1,
       availableTime: [rescheduleResult.new_event],
