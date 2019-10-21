@@ -179,6 +179,74 @@ Resources:
             Path: /modifyEvent
             Method: get
 
+  approveRescheduleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: approveRescheduleFunction
+      CodeUri: approveReschedule/
+      Handler: approveReschedule.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        approveRescheduleFunction:
+          Type: Api
+          Properties:
+            Path: /approveReschedule
+            Method: get
+  
+  acceptRescheduleSolutionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: acceptRescheduleSolutionFunction
+      CodeUri: acceptRescheduleSolution/
+      Handler: acceptRescheduleSolution.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        acceptRescheduleSolutionFunction:
+          Type: Api
+          Properties:
+            Path: /acceptRescheduleSolution
+            Method: get
+  
+  resetLockFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: resetLockFunction
+      CodeUri: resetLock/
+      Handler: resetLock.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        resetLockFunction:
+          Type: Api
+          Properties:
+            Path: /resetLock
+            Method: get
+
+  clearNotificationFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: clearNotificationFunction
+      CodeUri: clearNotification/
+      Handler: clearNotification.lambdaHandler
+      Runtime: nodejs8.10
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+      MemorySize: 256
+      Events:
+        clearNotificationFunction:
+          Type: Api
+          Properties:
+            Path: /clearNotification
+            Method: get
+
 Outputs:
   firestoreConnectionTestApi:
     Description: "API Gateway endpoint URL for Prod stage for documentdbConnectionTest function"
@@ -249,3 +317,31 @@ Outputs:
   modifyEventFunction:
     Description: "modify event Lambda Function ARN"
     Value: !GetAtt modifyEventFunction.Arn
+
+  approveRescheduleApi:
+    Description: "API Gateway endpoint URL for Prod stage for approve reschedule function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/approveReschedule/"
+  approveRescheduleFunction:
+    Description: "approve reschedule Lambda Function ARN"
+    Value: !GetAtt approveRescheduleFunction.Arn
+
+  acceptRescheduleSolutionApi:
+    Description: "API Gateway endpoint URL for Prod stage for accept reschedule solution function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/approveReschedule/"
+  acceptRescheduleSolutionFunction:
+    Description: "accept reschedule solution Lambda Function ARN"
+    Value: !GetAtt acceptRescheduleSolutionFunction.Arn
+
+  resetLockApi:
+    Description: "API Gateway endpoint URL for Prod stage for reset lock function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/approveReschedule/"
+  resetLockFunction:
+    Description: "reset lock Lambda Function ARN"
+    Value: !GetAtt resetLockFunction.Arn
+
+  clearNotificationApi:
+    Description: "API Gateway endpoint URL for Prod stage for clear notification function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/clearNotification/"
+  clearNotificationFunction:
+    Description: "clear notification Lambda Function ARN"
+    Value: !GetAtt clearNotificationFunction.Arn

@@ -10,7 +10,6 @@
  * status   : 0 => failed operation, user ID already exists 
  *            1 => successful operation
  *            2 => failed operation
- * 
  */
 const admin = require('firebase-admin');
 const serviceAccount = require('./serviceAccount.json');
@@ -47,6 +46,13 @@ exports.lambdaHandler = async (event, context, callback) => {
         {
           "events": [],
           "friends": [],
+          "notifications": {
+            "rescheduleReq": [],
+            "newEvent": [],
+            "rescheduleSuccess": [],
+            "rescheduleEvent": []
+          },
+          "reschedule_req": [],
           "password": password,
           "timestamp": moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss")
         }

@@ -172,6 +172,7 @@ exports.lambdaHandler = async (event, context, callback) => {
   new_event.timestamp = moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss");
   new_event.participants = userIds;
   let eventSnapshot = await eventRef.add(new_event);
+
   let batch = db.batch();
   for (var i = 0; i < userIds.length; i++) {
     let modify_event = users[userIds[i]].events[new_event.date];
@@ -181,9 +182,25 @@ exports.lambdaHandler = async (event, context, callback) => {
     } else {
       modify_event = [eventSnapshot.id];
     }
+
+    let newEventNotiMsg = {
+      eventId: eventSnapshot.id,
+      start: new_event.date + " " + new_event.timeslot[0],
+      end: new_event.date + " " + new_event.timeslot[1]
+    };
+    let newEventNoti = users[userIds[i]].notifications.newEvent;
+    if (newEventNoti != undefined) {
+      newEventNoti.push(newEventNotiMsg);
+      newEventNoti = Array.from(new Set(newEventNoti));
+    }
+    else {
+      newEventNoti = [newEventNotiMsg];
+    }
+
     let modify_event_key = "events." + new_event.date;
     batch.update(userRef.doc(userIds[i]), {
       [modify_event_key] : modify_event,
+      "notifications.newEvent": newEventNoti,
       "timestamp": moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss")
     });
   }

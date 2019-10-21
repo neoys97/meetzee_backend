@@ -247,31 +247,48 @@ exports.lambdaHandler = async (event, context, callback) => {
   if (resolved) {
     rescheduleResult["new_event"].start = rescheduleResult["new_event"].start.format("YYYY-MM-DD HH:mm:ss");
     rescheduleResult["new_event"].end = rescheduleResult["new_event"].end.format("YYYY-MM-DD HH:mm:ss");
+    rescheduleResult["new_event"].participants = userIds;
     for (var k in rescheduleResult["victim_events"]) {
       rescheduleResult["victim_events"][k].start = rescheduleResult["victim_events"][k].start.format("YYYY-MM-DD HH:mm:ss");
       rescheduleResult["victim_events"][k].end = rescheduleResult["victim_events"][k].end.format("YYYY-MM-DD HH:mm:ss");
       rescheduleResult["victim_events"][k].approved = 0;
+      rescheduleResult["victim_events"][k].responded = 0;
       rescheduleResult["victim_events"][k].host = all_events[k].host;
     }
     rescheduleResult.timestamp = moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss");
     let transactionSnapshot = await db.collection("transactions").add(rescheduleResult);
     
-    let batch = db.batch();
-    for (var k in rescheduleResult["victim_events"]) {
-      let transactionReqId = users[all_events[k].host]["reschedule_req"];
-      if (transactionReqId != undefined) {
-        transactionReqId.push(transactionSnapshot.id);
-        transactionReqId = Array.from(new Set(transactionReqId));
-      }
-      else {
-        transactionReqId = [transactionSnapshot];
-      }
-      batch.update(userRef.doc(all_events[k].host), {
-        "reschedule_req" : transactionReqId,
-        "timestamp": moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss")
-      });
-    }
-    await batch.commit();
+    // let batch = db.batch();
+    // for (var k in rescheduleResult["victim_events"]) {
+    //   let transactionReqId = users[all_events[k].host]["reschedule_req"];
+    //   let notificationsRescheduleRequest = users[all_events[k].host]["notifications"]["rescheduleRequest"];
+    //   if (transactionReqId != undefined) {
+    //     transactionReqId.push(transactionSnapshot.id);
+    //     transactionReqId = Array.from(new Set(transactionReqId));
+    //   }
+    //   else {
+    //     transactionReqId = [transactionSnapshot.id];
+    //   }
+    //   let rescheduleNotiMessage = {
+    //     eventId: k,
+    //     reschedule_start: rescheduleResult["victim_events"][k].start,
+    //     reschedule_end: rescheduleResult["victim_events"][k].end
+    //   };
+    //   if (notificationsRescheduleRequest != undefined) {
+    //     notificationsRescheduleRequest.push(rescheduleNotiMessage);
+    //     notificationsRescheduleRequest = Array.from(new Set(notificationsRescheduleRequest));
+    //   } 
+    //   else {
+    //     notificationsRescheduleRequest = [rescheduleNotiMessage];
+    //   }
+      
+    //   batch.update(userRef.doc(all_events[k].host), {
+    //     "reschedule_req" : transactionReqId,
+    //     "notifications.rescheduleRequest": notificationsRescheduleRequest,
+    //     "timestamp": moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss")
+    //   });
+    // }
+    // await batch.commit();
 
     response.body = JSON.stringify({
       status: 1,

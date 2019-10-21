@@ -141,4 +141,8 @@ findSlot/serviceAccount.json
 deleteEvent/serviceAccount.json
 getUserData/serviceAccount.json
 modifyEvent/serviceAccount.json
+approveReschedule/serviceAccount.json
+resetLock/serviceAccount.json
+acceptRescheduleSolution/serviceAccount.json
+clearNotification/serviceAccount.json
 reschedule_algo/node_modules

@@ -75,3 +75,11 @@ vulpix_squirt, yoshi_pika, magikarp_psy
         "remarks" : ""
     }
 }
+
+findSlot 
+{
+    "userIds": ["mario_torch", "vulpix_squirt"],
+    "duration": "02:00:00",
+    "bufferTime": "00:10:00",
+    "dates" :["2019-10-01", "2019-10-01"]
+}
