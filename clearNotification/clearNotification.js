@@ -31,7 +31,7 @@ exports.lambdaHandler = async (event, context, callback) => {
     })
   };
 
-  let userId = events.userId;
+  let userId = event.userId;
   // let userId = "vulpix_squirt";
 
   await db.collection('users').doc(userId).update({

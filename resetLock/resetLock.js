@@ -29,7 +29,7 @@ exports.lambdaHandler = async (event, context, callback) => {
     })
   };
 
-  await db.collection('lock').doc('all').update({locked: 1});
+  await db.collection('lock').doc('all').update({locked: 0});
 
   return response;
 }

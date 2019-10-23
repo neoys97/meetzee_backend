@@ -47,7 +47,7 @@ exports.lambdaHandler = async (event, context, callback) => {
           "events": [],
           "friends": [],
           "notifications": {
-            "rescheduleReq": [],
+            "rescheduleRequest": [],
             "newEvent": [],
             "rescheduleSuccess": [],
             "rescheduleEvent": []
