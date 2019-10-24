@@ -28,7 +28,7 @@ exports.lambdaHandler = async (event, context, callback) => {
     statusCode: 200
   };
 
-  // let userId = "yoshi_pika";
+  // let userId = "Adam";
 
   let userId = event.userId;
 
@@ -54,7 +54,7 @@ exports.lambdaHandler = async (event, context, callback) => {
     }
     if (userSnapshot.data().reschedule_req != undefined) {
       for (var tid of userSnapshot.data().reschedule_req) {
-        const p = transactionRef.doc(tid);
+        const p = transactionRef.doc(tid).get();
         transactionPromises.push(p);
       }
     }

@@ -131,6 +131,7 @@ let checkRescheduleFeasibility = (schedule, events, victim_ids, target_duration)
                 // console.log("found");
                 let returnValue = {};
                 returnValue["new_event"] = slot;
+                returnValue["victim_events"] = {};
                 returnValue["victim_events"][possibleEventKeys[0]] = possibleRescheduleTimeSlot[possibleEventKeys[0]][0];
                 return returnValue;
             }
