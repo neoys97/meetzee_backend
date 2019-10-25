@@ -62,13 +62,13 @@ exports.lambdaHandler = async (event, context, callback) => {
     return response;
   }
 
-  // let transactionId = "XOz8VKvc6LIpWw9ivybh";
-  // let eventId = "7IZFvZZvHifbjFAxZwq8";
+  // let transactionId = "KYIxNXV8w9gi9s0m2lDB";
+  // let eventId = "BPzGdMl5069yNuToWrsx";
   // let approved = 1;
 
-  let transactionId = events.transactionId;
-  let eventId = events.eventId;
-  let approved = events.approved;
+  let transactionId = event.transactionId;
+  let eventId = event.eventId;
+  let approved = event.approved;
 
   if (!eventId) {
     response.body = JSON.stringify({
@@ -229,9 +229,9 @@ exports.lambdaHandler = async (event, context, callback) => {
           date: transactionData.new_event.start.split(" ")[0],
           timeslot: [transactionData.new_event.start.split(" ")[1], transactionData.new_event.end.split(" ")[1]],
           participants: transactionData.new_event.participants,
-          location: "",
-          remark: "",
-          title: "",
+          location: (transactionData.new_event.location != undefined) ? transactionData.new_event.location : "",
+          remarks: (transactionData.new_event.remarks != undefined) ? transactionData.new_event.remarks : "",
+          title: (transactionData.new_event.title != undefined) ? transactionData.new_event.title : "",
           timestamp: moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss")
         }
         // create meeting
@@ -239,17 +239,18 @@ exports.lambdaHandler = async (event, context, callback) => {
 
         // change victims events timeslot and notify victims event participants
         for (var k in transactionData.victim_events) {
-          batch.update(eventRef.doc(k), {
-            timeslot: [transactionData.victim_events[k].start.split(" ")[1], transactionData.victim_events[k].end.split(" ")[1]]
-          });
+          console.log(check_events[k]);
+          check_events[k]["timeslot"] = [transactionData.victim_events[k].start.split(" ")[1], transactionData.victim_events[k].end.split(" ")[1]];
+          check_events[k]["timestamp"] = moment().utc().add(8,"hours").format("YYYY-MM-DD HH:mm:ss");
+          batch.update(eventRef.doc(k), check_events[k]);
+
           for (var uid of check_events[k].participants) {
             let rescheduleEventNotiMsg = {
               eventId: k,
               reschedule_start: transactionData.victim_events[k].start,
               reschedule_end: transactionData.victim_events[k].end
             };
-            // console.log(uid);
-            // console.log(users);
+
             let rescheduleEventNoti = users[uid].notifications.rescheduleEvent;
             if (rescheduleEventNoti != undefined) {
               rescheduleEventNoti.push(rescheduleEventNotiMsg);
