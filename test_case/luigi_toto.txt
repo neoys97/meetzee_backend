@@ -9,7 +9,7 @@ updateScheduleFunction:
     "userId": "luigi_toto",
     "routines": [
         {
-            "date": ["2019-10-01", "2019-10-31"],
+            "date": ["2019-10-01", "2019-11-30"],
             "day": 2,
             "repeat": 1,
             "timeslot": ["00:00", "07:00"],
@@ -18,7 +18,7 @@ updateScheduleFunction:
             "location": ""
         },
         {
-            "date": ["2019-10-01", "2019-10-31"],
+            "date": ["2019-10-01", "2019-11-30"],
             "day": 2,
             "repeat": 1,
             "timeslot": ["23:00", "24:00"],
