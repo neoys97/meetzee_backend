@@ -279,7 +279,7 @@ status   : 0 => failed operation, routines is empty
 ## Notification session in users
 * newly added notification session under users
 * separated into 4 categories namely:
-..* rescheduleRequest : populated when there is a reschedule request
+  * rescheduleRequest : populated when there is a reschedule request
 ```
 format: 
 {
@@ -288,7 +288,7 @@ format:
     reschedule_end      : end time in format "YYYY-MM-DD HH:mm:ss"
 }
 ```
-..* newEvent          : populated when new event is added to the users
+  * newEvent          : populated when new event is added to the users
 ```
 format: 
 {
@@ -297,7 +297,7 @@ format:
     end                 : end time in format "YYYY-MM-DD HH:mm:ss"
 }
 ```
-..* rescheduleSuccess : populated upon success or fail reschedule request
+  * rescheduleSuccess : populated upon success or fail reschedule request
 ```
 format: 
 {
@@ -306,7 +306,7 @@ format:
     end                 : end time in format "YYYY-MM-DD HH:mm:ss"
 }
 ```
-..* rescheduleEvent   : populated when there is an event being rescheduled
+  * rescheduleEvent   : populated when there is an event being rescheduled
 ```
 format: 
 {
