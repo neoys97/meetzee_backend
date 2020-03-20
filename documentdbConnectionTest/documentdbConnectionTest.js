@@ -12,7 +12,7 @@ function connectToDocumentDB() {
         return Promise.resolve(cachedDb);
     }
     return MongoClient.connect(
-        'mongodb://meetzee:ioshku1234@meetzee-db-001.cluster-cxvh6pi9nbkr.ap-northeast-2.docdb.amazonaws.com:27017/?ssl=true&ssl_ca_certs=rds-combined-ca-bundle.pem&replicaSet=rs0', 
+        '<documentDB path>', 
         { ssl: true, sslCA: ca, useNewUrlParser: true, useUnifiedTopology: true }
     ).then(db => {
         console.log("Connection established");
